@@ -1,4 +1,4 @@
-# 🛡️ GitHub Shield API - Estudo de Caso: Defesa em Profundidade contra Mass Assignment
+# 🛡️ GitHub API - Estudo de Caso: Defesa em Profundidade contra Mass Assignment
 
 Projeto prático desenvolvido para a disciplina, abordando a identificação e resolução da vulnerabilidade clássica de **Mass Assignment** (Caso Homakov / GitHub de 2012) transposta para o ambiente moderno de APIs REST com **Node.js, Express, Sequelize (MySQL), JWT e Bcrypt**.
 

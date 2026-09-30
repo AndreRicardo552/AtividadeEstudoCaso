@@ -10,7 +10,7 @@
       "parentId": null,
       "modified": 1727722800000,
       "created": 1727722800000,
-      "name": "GitHub Shield API - Estudo de Caso",
+      "name": "Github API - Estudo de Caso",
       "description": "Demonstração prática de defesa contra Mass Assignment e Segurança com JWT/Bcrypt",
       "scope": "collection"
     },

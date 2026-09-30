@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.status(200).json({
     status: 'online',
-    project: 'GitHub Shield API - Defesa em Profundidade contra Mass Assignment',
+    project: 'Github API - Defesa em Profundidade contra Mass Assignment',
     timestamp: new Date().toISOString()
   });
 });
