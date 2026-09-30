@@ -33,6 +33,22 @@
       "metaSortKey": 1727722800000
     },
     {
+      "_id": "req_0_reset_db",
+      "_type": "request",
+      "parentId": "wrk_github_shield",
+      "modified": 1727722800000,
+      "created": 1727722800000,
+      "url": "{{ _.base_url }}/reset",
+      "name": "0. [Setup] Resetar Banco de Dados",
+      "description": "Limpa todos os usuários cadastrados e reinicia a tabela para novos testes de apresentação.",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -110
+    },
+    {
       "_id": "req_1_register_mass_assignment",
       "_type": "request",
       "parentId": "wrk_github_shield",

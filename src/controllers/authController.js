@@ -127,8 +127,26 @@ const getProfile = async (req, res) => {
   }
 };
 
+// Utilitário para testes e demonstrações: limpa todos os usuários cadastrados
+const resetDatabase = async (req, res) => {
+  try {
+    await User.destroy({ where: {}, truncate: true, cascade: true });
+    return res.status(200).json({
+      success: true,
+      message: 'Banco de dados limpo com sucesso! Pronto para novas demonstrações.'
+    });
+  } catch (error) {
+    console.error('Erro ao resetar o banco de dados:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Erro ao limpar banco de dados.'
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
-  getProfile
+  getProfile,
+  resetDatabase
 };

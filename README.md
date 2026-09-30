@@ -21,7 +21,7 @@ EstudoCasoGithub/
 │   ├── config/
 │   │   └── database.js          # Conexão Sequelize com MySQL
 │   ├── controllers/
-│   │   └── authController.js    # Lógica de registro, login e perfil seguro
+│   │   └── authController.js    # Lógica de registro, login, perfil e reset
 │   ├── middlewares/
 │   │   └── verifyToken.js       # Validação e integridade do JWT
 │   ├── models/
@@ -35,6 +35,7 @@ EstudoCasoGithub/
 ├── .env                         # Configurações do ambiente local
 ├── insomnia_collection.json     # Coleção exportada pronta para importar no Insomnia
 ├── package.json                 # Dependências e scripts do projeto
+├── reset-db.js                  # Script para limpar a base de dados via CLI
 └── server.js                    # Bootstrap da aplicação e sincronização do BD
 ```
 
@@ -67,16 +68,27 @@ npm run dev
 npm start
 ```
 
+### 3. Como Limpar o Banco de Dados (Para retestar)
+Você tem duas opções simples para resetar a tabela e testar do zero quantas vezes quiser:
+
+* **Opção A (Via Terminal):**
+  ```bash
+  npm run db:reset
+  ```
+* **Opção B (Pelo Próprio Insomnia):**
+  Execute a requisição `0. [Setup] Resetar Banco de Dados` (`POST /api/auth/reset`).
+
 ---
 
 ## 🧪 Demonstração Prática no Insomnia
 
 Importe o arquivo [`insomnia_collection.json`](./insomnia_collection.json) no Insomnia (*Application -> Preferences/Data -> Import Data -> From File*).
 
-A coleção já vem configurada com os **5 cenários essenciais para a apresentação**:
+A coleção já vem configurada com os cenários essenciais para a apresentação:
 
 | # | Requisição | Método | Endpoint | Objetivo da Demonstração |
 |---|---|---|---|---|
+| **0** | **[Setup] Resetar Banco de Dados** | `POST` | `/api/auth/reset` | Limpa a tabela para reiniciar a demonstração a qualquer momento. |
 | **1** | **[Ataque] Registro com Mass Assignment** | `POST` | `/api/auth/register` | Envia `"role": "admin"`. A API intercepta via `matchedData` e `fields`, cadastrando com `role: "user"`. |
 | **2** | **[Validação] Registro com Dados Inválidos** | `POST` | `/api/auth/register` | Envia e-mail e senha inválidos. Retorna `400 Bad Request` com a lista de erros do `express-validator`. |
 | **3** | **[Autenticação] Login com Sucesso** | `POST` | `/api/auth/login` | Compara hash bcrypt e gera o token JWT assinado. |

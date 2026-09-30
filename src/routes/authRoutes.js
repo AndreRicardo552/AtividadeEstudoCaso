@@ -12,4 +12,7 @@ router.post('/login', loginRules, authController.login);
 // Rota protegida por autenticação JWT
 router.get('/profile', verifyToken, authController.getProfile);
 
+// Rota utilitária para testes/apresentações: limpa a base de usuários
+router.post('/reset', authController.resetDatabase);
+
 module.exports = router;
