@@ -5,7 +5,7 @@
   "__export_source": "insomnia.desktop.app:v2023.5.8",
   "resources": [
     {
-      "_id": "wrk_github_shield",
+      "_id": "wrk_github_api",
       "_type": "workspace",
       "parentId": null,
       "modified": 1727722800000,
@@ -17,7 +17,7 @@
     {
       "_id": "env_base",
       "_type": "environment",
-      "parentId": "wrk_github_shield",
+      "parentId": "wrk_github_api",
       "modified": 1727722800000,
       "created": 1727722800000,
       "name": "Base Environment",
@@ -35,10 +35,10 @@
     {
       "_id": "req_0_reset_db",
       "_type": "request",
-      "parentId": "wrk_github_shield",
+      "parentId": "wrk_github_api",
       "modified": 1727722800000,
       "created": 1727722800000,
-      "url": "{{ _.base_url }}/reset",
+      "url": "{{ base_url }}/reset",
       "name": "0. [Setup] Resetar Banco de Dados",
       "description": "Limpa todos os usuários cadastrados e reinicia a tabela para novos testes de apresentação.",
       "method": "POST",
@@ -51,10 +51,10 @@
     {
       "_id": "req_1_register_mass_assignment",
       "_type": "request",
-      "parentId": "wrk_github_shield",
+      "parentId": "wrk_github_api",
       "modified": 1727722800000,
       "created": 1727722800000,
-      "url": "{{ _.base_url }}/register",
+      "url": "{{ base_url }}/register",
       "name": "1. [Ataque] Registro com Mass Assignment (role: admin)",
       "description": "Tentativa de injeção do atributo 'role: admin' no payload. Demonstração de que a API ignora e grava como 'user'.",
       "method": "POST",
@@ -75,10 +75,10 @@
     {
       "_id": "req_2_register_validation_error",
       "_type": "request",
-      "parentId": "wrk_github_shield",
+      "parentId": "wrk_github_api",
       "modified": 1727722800000,
       "created": 1727722800000,
-      "url": "{{ _.base_url }}/register",
+      "url": "{{ base_url }}/register",
       "name": "2. [Validação] Registro com Dados Inválidos",
       "description": "Testa express-validator com e-mail inválido e senha curta, retornando 400 Bad Request detalhado.",
       "method": "POST",
@@ -99,10 +99,10 @@
     {
       "_id": "req_3_login_success",
       "_type": "request",
-      "parentId": "wrk_github_shield",
+      "parentId": "wrk_github_api",
       "modified": 1727722800000,
       "created": 1727722800000,
-      "url": "{{ _.base_url }}/login",
+      "url": "{{ base_url }}/login",
       "name": "3. [Autenticação] Login com Sucesso (Gera JWT)",
       "description": "Autentica usuário com bcrypt e retorna token JWT assinado.",
       "method": "POST",
@@ -123,10 +123,10 @@
     {
       "_id": "req_4_profile_unauthorized",
       "_type": "request",
-      "parentId": "wrk_github_shield",
+      "parentId": "wrk_github_api",
       "modified": 1727722800000,
       "created": 1727722800000,
-      "url": "{{ _.base_url }}/profile",
+      "url": "{{ base_url }}/profile",
       "name": "4. [Segurança] Acesso a Rota Protegida Sem Token (401)",
       "description": "Demonstra o bloqueio de segurança do middleware verifyToken quando nenhum token é enviado.",
       "method": "GET",
@@ -139,10 +139,10 @@
     {
       "_id": "req_5_profile_authorized",
       "_type": "request",
-      "parentId": "wrk_github_shield",
+      "parentId": "wrk_github_api",
       "modified": 1727722800000,
       "created": 1727722800000,
-      "url": "{{ _.base_url }}/profile",
+      "url": "{{ base_url }}/profile",
       "name": "5. [Segurança] Acesso a Rota Protegida Com Token JWT (200)",
       "description": "Valida o token JWT através do Bearer Token e devolve os dados seguros do usuário autenticado.",
       "method": "GET",
@@ -151,7 +151,7 @@
       "headers": [],
       "authentication": {
         "type": "bearer",
-        "token": "{{ _.token }}"
+        "token": "{{ token }}"
       },
       "metaSortKey": -60
     }
