@@ -1,0 +1,143 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-09-30T19:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "wrk_github_shield",
+      "_type": "workspace",
+      "parentId": null,
+      "modified": 1727722800000,
+      "created": 1727722800000,
+      "name": "GitHub Shield API - Estudo de Caso",
+      "description": "Demonstração prática de defesa contra Mass Assignment e Segurança com JWT/Bcrypt",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "parentId": "wrk_github_shield",
+      "modified": 1727722800000,
+      "created": 1727722800000,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3000/api/auth",
+        "token": ""
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url", "token"]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1727722800000
+    },
+    {
+      "_id": "req_1_register_mass_assignment",
+      "_type": "request",
+      "parentId": "wrk_github_shield",
+      "modified": 1727722800000,
+      "created": 1727722800000,
+      "url": "{{ _.base_url }}/register",
+      "name": "1. [Ataque] Registro com Mass Assignment (role: admin)",
+      "description": "Tentativa de injeção do atributo 'role: admin' no payload. Demonstração de que a API ignora e grava como 'user'.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Egor Homakov\",\n  \"email\": \"homakov@security.test\",\n  \"password\": \"senhaSegura123\",\n  \"role\": \"admin\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -100
+    },
+    {
+      "_id": "req_2_register_validation_error",
+      "_type": "request",
+      "parentId": "wrk_github_shield",
+      "modified": 1727722800000,
+      "created": 1727722800000,
+      "url": "{{ _.base_url }}/register",
+      "name": "2. [Validação] Registro com Dados Inválidos",
+      "description": "Testa express-validator com e-mail inválido e senha curta, retornando 400 Bad Request detalhado.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"A\",\n  \"email\": \"email-invalido\",\n  \"password\": \"123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -90
+    },
+    {
+      "_id": "req_3_login_success",
+      "_type": "request",
+      "parentId": "wrk_github_shield",
+      "modified": 1727722800000,
+      "created": 1727722800000,
+      "url": "{{ _.base_url }}/login",
+      "name": "3. [Autenticação] Login com Sucesso (Gera JWT)",
+      "description": "Autentica usuário com bcrypt e retorna token JWT assinado.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"homakov@security.test\",\n  \"password\": \"senhaSegura123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -80
+    },
+    {
+      "_id": "req_4_profile_unauthorized",
+      "_type": "request",
+      "parentId": "wrk_github_shield",
+      "modified": 1727722800000,
+      "created": 1727722800000,
+      "url": "{{ _.base_url }}/profile",
+      "name": "4. [Segurança] Acesso a Rota Protegida Sem Token (401)",
+      "description": "Demonstra o bloqueio de segurança do middleware verifyToken quando nenhum token é enviado.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -70
+    },
+    {
+      "_id": "req_5_profile_authorized",
+      "_type": "request",
+      "parentId": "wrk_github_shield",
+      "modified": 1727722800000,
+      "created": 1727722800000,
+      "url": "{{ _.base_url }}/profile",
+      "name": "5. [Segurança] Acesso a Rota Protegida Com Token JWT (200)",
+      "description": "Valida o token JWT através do Bearer Token e devolve os dados seguros do usuário autenticado.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.token }}"
+      },
+      "metaSortKey": -60
+    }
+  ]
+}
